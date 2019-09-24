@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:decorate template="../WEB-INF/template/LayoutPadrao.xhtml">
+<!--<ui:define name="titulo">#{produtoBean.editando ? "Edição de produto" : "Novo produto"}</ui:define>-->
+<ui:define name="corpo">
+    <f:metadata>
+        <!-- Campo para Editar os produto, pegando o id do produto como parametro OmniFaces.org (Será necessário conversor)-->
+        <o:viewParam name="categoria" value="#{categoriaBean.categoria}" />
+        <f:event listener="#{categoriaBean.inicializar}" type="preRenderView" />
+        <h:form id="frmCategoria">
+        <h1>#{categoriaBean.editando ? "Edição de Produto" : "Novo Categoria"}</h1>
+
+        <p:messages autoUpdate="true" closable="true" />
+        <p:focus />
+        <p:toolbar style="margin-top: 20px;">
+        <f:facet name="left">
+            <p:button value="Novo" outcome="/categoria/CadastroCategoria" />
+            <p:commandButton value="Salvar" update="@form"
+                             action="#{categoriaBean.salvar}" />
+        </f:facet>
+        </p:toolbar>
+
+        </h:form>
+
+        <p:outputLabel value="Categoria" for="categoria" />
+        <p:selectOneMenu id="categoria" value="#{produtoBean.categoria}">
+            <f:selectItem itemLabel="Selecione Categoria" />
+            <f:selectItems value="#{produtoBean.categoriasRaizes}"
+                           var="categoria" itemLabel="#{categoria.descricao} "
+                           itemValue="#{categoria}" />
+            <p:ajax listener="#{produtoBean.carregarSubCategorias}"
+                    update="subcategoria" />
+        </p:selectOneMenu>
+    </f:metadata>
+</ui:define>
+</ui:decorate>
+
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:decorate template="WEB-INF/template/LayoutPadrao.xhtml">
+	<f:metadata>
+		<f:event listener="#{graficoPedidosCriadosBean.preRender}"
+			type="preRenderView" />
+	</f:metadata>
+	<ui:define name="titulo">DashBoard</ui:define>
+	<ui:define name="corpo">
+		<p:lineChart value="#{graficoPedidosCriadosBean.model}"
+			title="Pedidos criados" style="height: 400px" animate="true" minY="0"
+			legendPosition="e" />
+	</ui:define>
+</ui:decorate>
+</html>
