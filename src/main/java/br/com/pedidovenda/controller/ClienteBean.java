@@ -1,8 +1,10 @@
 package br.com.pedidovenda.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.el.MethodExpression;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,12 +32,13 @@ public class ClienteBean implements Serializable {
 	private Cliente cliente;
 	private Endereco endereco;
 
+//	private List<Endereco> enderecos;
+
 	private List<Cliente> clientesFiltrados;
 	private ClienteFilter clienteFilter;
 
 	public ClienteBean() {
 		limpar();
-		clienteFilter = new ClienteFilter();
 	}
 
 	public void salvar() {
@@ -57,8 +60,11 @@ public class ClienteBean implements Serializable {
 
 	private void limpar() {
 		cliente = new Cliente();
+		endereco = new Endereco();
 		cliente.setTipo(TipoPessoa.FISICA);
 		clienteFilter = new ClienteFilter();
+//		enderecos = new ArrayList<>();
+		cliente.setEnderecos(new ArrayList<>());
 	}
 
 	public boolean isEditando() {
@@ -81,6 +87,14 @@ public class ClienteBean implements Serializable {
 		this.endereco = endereco;
 	}
 
+//	public List<Endereco> getEnderecos() {
+//		return enderecos;
+//	}
+//
+//	public void setEnderecos(List<Endereco> enderecos) {
+//		this.enderecos = enderecos;
+//	}
+
 	public ClienteFilter getClienteFilter() {
 		return clienteFilter;
 	}
@@ -93,4 +107,9 @@ public class ClienteBean implements Serializable {
 		return clientesFiltrados;
 	}
 
+	public void integraClienteEndereco(){
+		this.endereco.setCliente(this.getCliente());
+		this.cliente.getEnderecos().add(this.endereco);
+		endereco = new Endereco();
+	}
 }

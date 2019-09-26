@@ -6,38 +6,48 @@
       xmlns:h="http://java.sun.com/jsf/html">
 
 <ui:decorate template="../WEB-INF/template/LayoutPadrao.xhtml">
-<!--<ui:define name="titulo">#{produtoBean.editando ? "Edição de produto" : "Novo produto"}</ui:define>-->
-<ui:define name="corpo">
-    <f:metadata>
-        <!-- Campo para Editar os produto, pegando o id do produto como parametro OmniFaces.org (Será necessário conversor)-->
-        <o:viewParam name="categoria" value="#{categoriaBean.categoria}" />
-        <f:event listener="#{categoriaBean.inicializar}" type="preRenderView" />
-        <h:form id="frmCategoria">
-        <h1>#{categoriaBean.editando ? "Edição de Produto" : "Novo Categoria"}</h1>
+    <ui:define name="titulo">"Nova categoria"</ui:define>
+    <ui:define name="corpo">
+        <f:metadata>
+            <o:viewParam name="categoria" value="#{categoriaBean.categoria}" />
+            <f:event listener="#{categoriaBean.inicializar}" type="preRenderView" />
+        </f:metadata>
+        <h:form>
+            <h1>#{categoriaBean.editando ? "Edição de Produto" : "Novo Categoria"}</h1>
 
-        <p:messages autoUpdate="true" closable="true" />
-        <p:focus />
-        <p:toolbar style="margin-top: 20px;">
-        <f:facet name="left">
-            <p:button value="Novo" outcome="/categoria/CadastroCategoria" />
-            <p:commandButton value="Salvar" update="@form"
-                             action="#{categoriaBean.salvar}" />
-        </f:facet>
-        </p:toolbar>
+            <p:messages autoUpdate="true" closable="true" />
+            <p:focus />
+            <p:toolbar style="margin-top: 20px;">
+                <f:facet name="left">
+                    <p:button value="Novo" outcome="/categoria/CadastroCategoria" />
+                    <p:commandButton value="Salvar" update="@form"
+                                     action="#{categoriaBean.salvar}" />
+                </f:facet>
+            </p:toolbar>
+            <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+                <p:outputLabel value="Categoria" for="categoria" />
+                <p:selectOneMenu id="categoria" value="#{categoriaBean.categoria}">
+                    <f:selectItem itemLabel="Selecione Categoria" />
+                    <f:selectItems value="#{categoriaBean.categoriasRaizes}"
+                                   var="categoria" itemLabel="#{categoria.descricao} "
+                                   itemValue="#{categoria}" />
+                    <p:ajax listener="#{categoriaBean.carregarSubCategorias}"
+                            update="subcategoria" />
+                </p:selectOneMenu>
+                <p:outputLabel value="Subcategoria" for="subcategoria" />
+                <p:selectOneMenu id="subcategoria"
+                                 value="#{categoriaBean.categoriaFilha}" required="true"
+                                 requiredMessage="Subcategoria obrigatório">
+                    <f:selectItem itemLabel="Selecione Subcategoria" />
+                    <f:selectItems value="#{categoriaBean.subCategorias}"
+                                   var="subcategoria" itemLabel="#{subcategoria.descricao}"
+                                   itemValue="#{subcategoria}" />
+                </p:selectOneMenu>
+            </p:panelGrid>
+
 
         </h:form>
-
-        <p:outputLabel value="Categoria" for="categoria" />
-        <p:selectOneMenu id="categoria" value="#{produtoBean.categoria}">
-            <f:selectItem itemLabel="Selecione Categoria" />
-            <f:selectItems value="#{produtoBean.categoriasRaizes}"
-                           var="categoria" itemLabel="#{categoria.descricao} "
-                           itemValue="#{categoria}" />
-            <p:ajax listener="#{produtoBean.carregarSubCategorias}"
-                    update="subcategoria" />
-        </p:selectOneMenu>
-    </f:metadata>
-</ui:define>
+    </ui:define>
 </ui:decorate>
 
 </html>

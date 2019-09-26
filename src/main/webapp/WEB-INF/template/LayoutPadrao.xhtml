@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:h="http://java.sun.com/jsf/html">
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><ui:insert name="titulo">Sistema de Pedidos de Vendas</ui:insert></title>
@@ -20,45 +20,45 @@
 		</f:facet>
 	</p:ajaxStatus>
 	<header>
-	<div style="float: left">
-		<h:link outcome="Home">
-			<h:graphicImage library="images" />
-		</h:link>
-	</div>
+		<div style="float: left">
+			<h:link outcome="Home">
+				<h:graphicImage library="images" />
+			</h:link>
+		</div>
 
-	<div style="float: right; margin-right: 110px">
+		<div style="float: right; margin-right: 110px">
 		<span
-			style="float: left; height: 30px; line-height: 30px; margin-right: 60px">Olá
+				style="float: left; height: 30px; line-height: 30px; margin-right: 60px">Olá
 			usuário #{seguranca.nomeUsuario}</span>
-		<h:form style="display: inline-block">
-			<p:menubar styleClass="menu-sistema">
-				<p:submenu label="Cadastros">
-					<p:menuitem value="Clientes" outcome="/clientes/CadastraCliente" />
-					<p:menuitem value="Usuários" outcome="/usuarios/CadastroUsuario" />
-					<p:separator />
-					<p:menuitem value="Categorias" outcome="/categoria/CadastroCategoria"/>
-					<p:menuitem value="Produtos" outcome="/produtos/PesquisaProdutos" />
-				</p:submenu>
-				<p:submenu label="Pedidos">
-					<p:menuitem value="Novo pedido" outcome="/pedidos/CadastroPedido" />
-					<p:menuitem value="Pesquisa pedido"
-						outcome="/pedidos/PesquisaPedidos" />
-				</p:submenu>
-				<p:submenu label="Relatórios">
-					<p:menuitem value="Pedidos"
-						outcome="/relatorios/RelatorioPedidosEmitidos" />
-					<p:menuitem value="Clientes" />
-					<p:menuitem value="Produtos"
-						outcome="/relatorios/RelatorioProdutos" />
+			<h:form style="display: inline-block">
+				<p:menubar styleClass="menu-sistema">
+					<p:submenu label="Cadastros">
+						<p:menuitem value="Clientes" outcome="/clientes/CadastraCliente" />
+						<p:menuitem value="Usuários" outcome="/usuarios/CadastroUsuario" />
+						<p:separator />
+						<p:menuitem value="Categorias" outcome="/categoria/CadastroCategoria"/>
+						<p:menuitem value="Produtos" outcome="/produtos/PesquisaProdutos" />
+					</p:submenu>
+					<p:submenu label="Pedidos">
+						<p:menuitem value="Novo pedido" outcome="/pedidos/CadastroPedido" />
+						<p:menuitem value="Pesquisa pedido"
+									outcome="/pedidos/PesquisaPedidos" />
+					</p:submenu>
+					<p:submenu label="Relatórios">
+						<p:menuitem value="Pedidos"
+									outcome="/relatorios/RelatorioPedidosEmitidos" />
+						<p:menuitem value="Clientes" />
+						<p:menuitem value="Produtos"
+									outcome="/relatorios/RelatorioProdutos" />
 
-				</p:submenu>
-				<p:menuitem value="Sair" url="/j_spring_security_logout" />
-			</p:menubar>
-		</h:form>
+					</p:submenu>
+					<p:menuitem value="Sair" url="/j_spring_security_logout" />
+				</p:menubar>
+			</h:form>
 
-	</div>
+		</div>
 
-	<div style="clear: both" />
+		<div style="clear: both" />
 
 	</header>
 
@@ -70,7 +70,7 @@
 
 	<script>
 		function configurarMoeda(){
-			$(".moeda").maskMoney({decimal: ",", thousands: ".", allowZero: true});		
+			$(".moeda").maskMoney({decimal: ",", thousands: ".", allowZero: true});
 		}
 
 		$(document).ready(function(){

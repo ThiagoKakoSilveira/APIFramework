@@ -6,17 +6,19 @@
 	<persistence-unit name="PedidoPU">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<properties>
-<!--			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/trabalhoframework?useTimezone=true&amp;serverTimezone=UTC" />-->
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://apiframework.c6aoubhyhnfv.us-west-2.rds.amazonaws.com/pedidovenda" />
-			<property name="javax.persistence.jdbc.user" value="thiagodev" />
-			<property name="javax.persistence.jdbc.password" value="KaySon1815" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/trabalhoframework?useTimezone=true&amp;serverTimezone=UTC" />
+<!--			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://apiframework.c6aoubhyhnfv.us-west-2.rds.amazonaws.com/pedidovenda" />-->
+<!--			<property name="javax.persistence.jdbc.user" value="thiagodev" /> senha prod-->
+<!--			<property name="javax.persistence.jdbc.password" value="KaySon1815" /> senha prod-->
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="meubd" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 
-			<!-- Gerenciamento de Pool de conexões. -->
+                        <!-- Gerenciamento de Pool de conexões. -->
 			<property name="hibernate.c3p0.min_size" value="5" />
 			<property name="hibernate.c3p0.max_size" value="20" />
 			<property name="hibernate.c3p0.timeout" value="300" />

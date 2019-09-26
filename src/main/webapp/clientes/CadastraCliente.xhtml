@@ -12,7 +12,7 @@
 			<!-- Campo para Editar os produto, pegando o id do produto como parametro OmniFaces.org (Será necessário conversor)-->
 			<o:viewParam name="cliente" value="#{clienteBean.cliente}" />
 		</f:metadata>
-		<h:form>
+		<h:form id="frmPai">
 			<h1>#{clienteBean.editando ? "Edição de cliente" : "Novo
 				cliente"}</h1>
 			<p:messages autoUpdate="true" closable="true" />
@@ -72,39 +72,40 @@
 
 			<ui:include src="../WEB-INF/template/clientes/EnderecoCliente.xhtml" />
 
-			<p:dialog header="Inclusão de endereço" modal="true" closable="true"
-				widgetVar="inclusaoEndereco" resizable="false">
+			<h:form id="modalEndereco">
+				<p:dialog header="Inclusão de endereço" modal="true" closable="true"
+						  widgetVar="inclusaoEndereco" resizable="false">
 
-				<p:panelGrid columns="2" columnClasses="rotulo, campo">
-					<p:outputLabel value="Logradouro" for="logradouro" />
-					<p:inputText id="logradouro" size="50"
-						value="#{clienteBean.endereco.logradouro}" />
+					<p:panelGrid columns="2" columnClasses="rotulo, campo">
+						<p:outputLabel value="Logradouro" for="logradouro" />
+						<p:inputText id="logradouro" size="50"
+									 value="#{clienteBean.endereco.logradouro}" />
 
-					<p:outputLabel value="Número" for="numero" />
-					<p:inputText id="numero" size="10"
-						value="#{clienteBean.endereco.numero}" />
+						<p:outputLabel value="Número" for="numero" />
+						<p:inputText id="numero" size="10"
+									 value="#{clienteBean.endereco.numero}" />
 
-					<p:outputLabel value="Complemento" for="complemento" />
-					<p:inputText id="complemento" size="30"
-						value="#{clienteBean.endereco.complemento}" />
+						<p:outputLabel value="Complemento" for="complemento" />
+						<p:inputText id="complemento" size="30"
+									 value="#{clienteBean.endereco.complemento}" />
 
-					<p:outputLabel value="CEP" for="cep" />
-					<p:inputText id="cep" size="20" value="#{clienteBean.endereco.cep}" />
+						<p:outputLabel value="CEP" for="cep" />
+						<p:inputText id="cep" size="20" value="#{clienteBean.endereco.cep}" />
 
-					<p:outputLabel value="Cidade" for="cidade" />
-					<h:panelGroup>
-						<p:inputText id="cidade" size="30"
-							value="#{clienteBean.endereco.cidade}" />
+						<p:outputLabel value="Cidade" for="cidade" />
+						<h:panelGroup>
+							<p:inputText id="cidade" size="30"
+										 value="#{clienteBean.endereco.cidade}" />
 
-						<p:outputLabel value="UF" for="uf" style="margin: 10px" />
-						<p:inputText id="uf" size="10" value="#{clienteBean.endereco.uf}" />
-					</h:panelGroup>
-					<p:spacer />
+							<p:outputLabel value="UF" for="uf" style="margin: 10px" />
+							<p:inputText id="uf" size="10" value="#{clienteBean.endereco.uf}" />
+						</h:panelGroup>
+						<p:spacer />
 
-					<p:commandButton value="Incluir"
-						oncomplete="PF('inclusaoEndereco').hide()" icon="ui-icon-document" />
-				</p:panelGrid>
-			</p:dialog>
+						<p:commandButton value="Incluir" oncomplete="PF('inclusaoEndereco').hide()" icon="ui-icon-document" action="#{clienteBean.integraClienteEndereco}" update=":frmPai:tabelaEnderecos @form" process="modalEndereco"/>
+					</p:panelGrid>
+				</p:dialog>
+			</h:form>
 
 			<p:confirmDialog header="Exclusão do endereço"
 				message="Tem certeza que deseja excluir este endereço?"

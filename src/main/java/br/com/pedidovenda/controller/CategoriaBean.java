@@ -23,6 +23,8 @@ public class CategoriaBean implements Serializable {
     @NotNull
     private Categoria categoria;
 
+    private Categoria categoriaFilha;
+
     private List<Categoria> categoriasRaizes;
     private List<Categoria> subCategorias;
 
@@ -42,12 +44,19 @@ public class CategoriaBean implements Serializable {
         }
     }
 
+    public void salvar(){
+        System.out.println("Salvando");
+    }
+
     public void carregarSubCategorias() {
         subCategorias = categoriaRepository.buscarSubCategorias(categoria);
     }
 
     public boolean isEditando() {
-        return this.categoria.getId() != null;
+        if (this.categoria != null){
+            return this.categoria.getId() != null;
+        }
+        return false;
     }
 
     public Categoria getCategoria() {
@@ -58,9 +67,20 @@ public class CategoriaBean implements Serializable {
         this.categoria = categoria;
     }
 
+    public Categoria getCategoriaFilha() {
+        return categoriaFilha;
+    }
+
+    public void setCategoriaFilha(Categoria categoriaFilha) {
+        this.categoriaFilha = categoriaFilha;
+    }
+
     public List<Categoria> getCategoriasRaizes() {
         return categoriasRaizes;
     }
+
+
+
 
     public List<Categoria> getSubCategorias() { return subCategorias; }
 
