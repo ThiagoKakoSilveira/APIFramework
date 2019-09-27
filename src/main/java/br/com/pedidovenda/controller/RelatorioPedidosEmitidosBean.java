@@ -38,8 +38,7 @@ public class RelatorioPedidosEmitidosBean implements Serializable {
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("data_inicio", this.dataInicio);
 		parametros.put("data_fim", this.dataFim);
-		ExecutorRelatorio executor = new ExecutorRelatorio(
-				"/relatorios/relatorioPedidosEmitidos.jasper", this.response,
+		ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/relatorioPedidosEmitidos.jasper", this.response,
 				parametros, "Pedido Emitidos.pdf");
 		Session session = entityManager.unwrap(Session.class);
 
@@ -47,10 +46,8 @@ public class RelatorioPedidosEmitidosBean implements Serializable {
 		if (executor.isRelatorioGerado()) {
 			facesContext.responseComplete();
 		} else {
-			FacesUtil
-					.addErrorMessage("A execução do relatório não retornou dados.");
+			FacesUtil.addErrorMessage("A execução do relatório não retornou dados.");
 		}
-
 	}
 
 	@NotNull

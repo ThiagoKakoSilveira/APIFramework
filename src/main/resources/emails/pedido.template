@@ -10,6 +10,10 @@
                 <td>$pedido.cliente.nome</td>
             </tr>
             <tr>
+                <td>Valor do Frete:</td>
+                <td>$numberTool.format("¤ #0.00", $pedido.valorFrete, $locale)</td>
+            </tr>
+            <tr>
                 <td>Valor total:</td>
                 <td>$numberTool.format("¤ #0.00", $pedido.valorTotal, $locale)</td>
             </tr>
