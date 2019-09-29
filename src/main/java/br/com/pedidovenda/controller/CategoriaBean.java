@@ -2,6 +2,7 @@ package br.com.pedidovenda.controller;
 
 import br.com.pedidovenda.model.Categoria;
 import br.com.pedidovenda.repository.CategoriaRepository;
+import br.com.pedidovenda.service.CadastroCategoriaService;
 import br.com.pedidovenda.util.jsf.FacesUtil;
 
 import javax.faces.bean.ViewScoped;
@@ -9,7 +10,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Named("categoriaBean")
@@ -21,10 +21,11 @@ public class CategoriaBean implements Serializable {
     @Inject
     private CategoriaRepository categoriaRepository;
 
+    @Inject
+    private CadastroCategoriaService cadastroCategoriaService;
+
     @NotNull
     private Categoria categoria;
-
-    private Categoria categoriaFilha;
 
     private List<Categoria> categoriasRaizes;
 
@@ -44,13 +45,18 @@ public class CategoriaBean implements Serializable {
         }
     }
 
+    private void atualizarRaizes(){
+        categoriasRaizes = categoriaRepository.buscarCategoriasRaizes();
+    }
+
     private void limpar() {
-        categoriaFilha = new Categoria();
-        categoria = null;
+        categoria = new Categoria();
     }
 
     public void salvar(){
-        System.out.println("Salvando");
+        this.categoria = cadastroCategoriaService.salvar(categoria);
+        FacesUtil.addInfoMessage("Categoria cadastrada com sucesso!");
+        atualizarRaizes();
         limpar();
     }
 
@@ -69,16 +75,7 @@ public class CategoriaBean implements Serializable {
         this.categoria = categoria;
     }
 
-    public Categoria getCategoriaFilha() {
-        return categoriaFilha;
-    }
-
-    public void setCategoriaFilha(Categoria categoriaFilha) {
-        this.categoriaFilha = categoriaFilha;
-    }
-
     public List<Categoria> getCategoriasRaizes() {
         return categoriasRaizes;
     }
-
 }

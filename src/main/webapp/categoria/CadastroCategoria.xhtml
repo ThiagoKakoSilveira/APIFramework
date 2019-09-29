@@ -20,19 +20,18 @@
             <p:toolbar style="margin-top: 20px;">
                 <f:facet name="left">
                     <p:button value="Novo" outcome="/categoria/CadastroCategoria" />
-                    <p:commandButton value="Salvar" update="@form"
-                                     action="#{categoriaBean.salvar}" />
+                    <p:commandButton value="Salvar" update="@form" action="#{categoriaBean.salvar}" />
                 </f:facet>
             </p:toolbar>
             <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
                 <p:outputLabel value="Categoria" for="categoriaPai" />
-                <p:selectOneMenu id="categoriaPai" value="#{categoriaBean.categoria}">
+                <p:selectOneMenu id="categoriaPai" value="#{categoriaBean.categoria.categoriaPai}">
                     <f:selectItem itemLabel="Uma Categoria Pai" />
                     <f:selectItems value="#{categoriaBean.categoriasRaizes}" var="categoria" itemLabel="#{categoria.descricao} "
                                    itemValue="#{categoria}" />
                 </p:selectOneMenu>
                 <p:outputLabel value="Descrição" for="descricao" />
-                <p:inputText id="descricao" value="#{categoriaBean.categoriaFilha.descricao}"/>
+                <p:inputText id="descricao" value="#{categoriaBean.categoria.descricao}"/>
 
             </p:panelGrid>
 

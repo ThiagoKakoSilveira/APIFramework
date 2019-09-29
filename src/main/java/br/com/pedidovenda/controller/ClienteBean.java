@@ -1,14 +1,5 @@
 package br.com.pedidovenda.controller;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.el.MethodExpression;
-import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import br.com.pedidovenda.model.Cliente;
 import br.com.pedidovenda.model.Endereco;
 import br.com.pedidovenda.model.TipoPessoa;
@@ -17,6 +8,13 @@ import br.com.pedidovenda.repository.EnderecoRepository;
 import br.com.pedidovenda.repository.filter.ClienteFilter;
 import br.com.pedidovenda.service.ClienteService;
 import br.com.pedidovenda.util.jsf.FacesUtil;
+
+import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Named("clienteBean")
 @ViewScoped
