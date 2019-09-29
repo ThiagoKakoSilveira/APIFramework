@@ -25,24 +25,15 @@
                 </f:facet>
             </p:toolbar>
             <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
-                <p:outputLabel value="Categoria" for="categoria" />
-                <p:selectOneMenu id="categoria" value="#{categoriaBean.categoria}">
-                    <f:selectItem itemLabel="Selecione Categoria" />
-                    <f:selectItems value="#{categoriaBean.categoriasRaizes}"
-                                   var="categoria" itemLabel="#{categoria.descricao} "
+                <p:outputLabel value="Categoria" for="categoriaPai" />
+                <p:selectOneMenu id="categoriaPai" value="#{categoriaBean.categoria}">
+                    <f:selectItem itemLabel="Uma Categoria Pai" />
+                    <f:selectItems value="#{categoriaBean.categoriasRaizes}" var="categoria" itemLabel="#{categoria.descricao} "
                                    itemValue="#{categoria}" />
-                    <p:ajax listener="#{categoriaBean.carregarSubCategorias}"
-                            update="subcategoria" />
                 </p:selectOneMenu>
-                <p:outputLabel value="Subcategoria" for="subcategoria" />
-                <p:selectOneMenu id="subcategoria"
-                                 value="#{categoriaBean.categoriaFilha}" required="true"
-                                 requiredMessage="Subcategoria obrigatório">
-                    <f:selectItem itemLabel="Selecione Subcategoria" />
-                    <f:selectItems value="#{categoriaBean.subCategorias}"
-                                   var="subcategoria" itemLabel="#{subcategoria.descricao}"
-                                   itemValue="#{subcategoria}" />
-                </p:selectOneMenu>
+                <p:outputLabel value="Descrição" for="descricao" />
+                <p:inputText id="descricao" value="#{categoriaBean.categoriaFilha.descricao}"/>
+
             </p:panelGrid>
 
 

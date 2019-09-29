@@ -27,7 +27,11 @@
 	</p:column>
 
 	<p:column style="text-align: center; width: 70px" headerText="Ações">
-		<p:button icon="ui-icon-pencil" title="Editar" />
+
+		<p:commandButton icon="ui-icon-pencil" title="Editar" oncomplete="PF('inclusaoEndereco').show()" update=":frmPai:modalEndereco" process="@this :frmPai:modalEndereco">
+            <f:setPropertyActionListener value="#{endereco}" target="#{clienteBean.endereco}" />
+        </p:commandButton>
+
 		<p:commandButton icon="ui-icon-trash" title="Excluir"
 			onclick="PF('exclusaoEndereco').show()" />
 	</p:column>

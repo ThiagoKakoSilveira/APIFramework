@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named("categoriaBean")
@@ -26,7 +27,10 @@ public class CategoriaBean implements Serializable {
     private Categoria categoriaFilha;
 
     private List<Categoria> categoriasRaizes;
-    private List<Categoria> subCategorias;
+
+    public CategoriaBean(){
+        limpar();
+    }
 
     public void inicializar() {
         System.out.println("Inicializando...");
@@ -37,19 +41,17 @@ public class CategoriaBean implements Serializable {
          */
         if (FacesUtil.isNotPostback()) {
             categoriasRaizes = categoriaRepository.buscarCategoriasRaizes();
-            // preenchendo o combo de subcategorias
-            if (this.categoria != null) {
-                carregarSubCategorias();
-            }
         }
+    }
+
+    private void limpar() {
+        categoriaFilha = new Categoria();
+        categoria = null;
     }
 
     public void salvar(){
         System.out.println("Salvando");
-    }
-
-    public void carregarSubCategorias() {
-        subCategorias = categoriaRepository.buscarSubCategorias(categoria);
+        limpar();
     }
 
     public boolean isEditando() {
@@ -78,10 +80,5 @@ public class CategoriaBean implements Serializable {
     public List<Categoria> getCategoriasRaizes() {
         return categoriasRaizes;
     }
-
-
-
-
-    public List<Categoria> getSubCategorias() { return subCategorias; }
 
 }

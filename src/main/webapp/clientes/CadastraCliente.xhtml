@@ -13,8 +13,7 @@
 			<o:viewParam name="cliente" value="#{clienteBean.cliente}" />
 		</f:metadata>
 		<h:form id="frmPai">
-			<h1>#{clienteBean.editando ? "Edição de cliente" : "Novo
-				cliente"}</h1>
+			<h1>#{clienteBean.editando ? "Edição de cliente" : "Novo cliente"}</h1>
 			<p:messages autoUpdate="true" closable="true" />
 
 			<p:toolbar style="margin-top: 20px;">
@@ -67,7 +66,7 @@
 					value="#{clienteBean.cliente.email}" />
 
 				<p:commandButton value="Endereço" icon="ui-icon-plusthick"
-					onclick="PF('inclusaoEndereco').show()" />
+					oncomplete="PF('inclusaoEndereco').show()" action="#{clienteBean.criaEndereco}" update=":frmPai:modalEndereco" process="@this :frmPai:modalEndereco"/>
 			</p:panelGrid>
 
 			<ui:include src="../WEB-INF/template/clientes/EnderecoCliente.xhtml" />
@@ -77,6 +76,8 @@
 						  widgetVar="inclusaoEndereco" resizable="false">
 
 					<p:panelGrid columns="2" columnClasses="rotulo, campo">
+						<p:outputLabel value="Cód Endereço" for="cod" rendered="#{clienteBean.editandoEndereco}"/>
+						<p:inputText id="cod" value="#{clienteBean.endereco.id}" rendered="#{clienteBean.editandoEndereco}" readonly="true"/>
 						<p:outputLabel value="Logradouro" for="logradouro" />
 						<p:inputText id="logradouro" size="50"
 									 value="#{clienteBean.endereco.logradouro}" />
@@ -103,6 +104,7 @@
 						<p:spacer />
 
 						<p:commandButton value="Incluir" oncomplete="PF('inclusaoEndereco').hide()" icon="ui-icon-document" action="#{clienteBean.integraClienteEndereco}" update=":frmPai:tabelaEnderecos @form" process="modalEndereco"/>
+
 					</p:panelGrid>
 				</p:dialog>
 			</h:form>
