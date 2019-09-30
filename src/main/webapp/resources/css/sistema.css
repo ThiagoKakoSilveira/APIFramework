@@ -22,6 +22,11 @@ header > div {
 	margin-left: 8px
 }
 
+#logo {
+	width: 187px;
+	margin-top: -77px;
+}
+
 #conteudo {
 	padding: 0px 8px
 }
