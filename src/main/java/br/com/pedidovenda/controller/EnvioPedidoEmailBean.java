@@ -30,9 +30,19 @@ public class EnvioPedidoEmailBean implements Serializable {
 
 	public void enviarPedido() throws IOException {
 		MailMessage message = mailer.novaMensagem();
+
+//		URL caminhoTemplate = getClass().getResource("/emails/pedido.template");
+//		System.out.println(caminhoTemplate.toString());
+
+//		File file = new File(caminhoTemplate.toString());
+
+//		URL url2 = getClass().getClassLoader().getResource("/emails/pedido.template");
+//		System.out.println(url2);
+
 		message.to(this.pedido.getCliente().getEmail())
 				.subject("Pedido " + this.pedido.getId())
 //				.bodyHtml(new VelocityTemplate(getClass().getResourceAsStream("/emails/pedido.template")))
+//				.bodyHtml(new VelocityTemplate(file))
 				.bodyHtml(new VelocityTemplate(new File("D:\\TesteIntelliJ\\PedidoVendaFielAoCurso\\PedidoVenda-master\\src\\main\\resources\\emails\\pedido.template")))
 				.put("pedido", this.pedido)
 				.put("numberTool", new NumberTool())

@@ -1,0 +1,19 @@
+<html>
+    <body>
+        <h2>O usuário será seu email</h2>
+        <br/>
+        <table>
+            <tr>
+                <td style="width: 100px">Usuário:</td>
+                <td>$usuario.email</td>
+            </tr>
+            <tr>
+                <td>Senha:</td>
+                <td>$usuario.senha</td>
+            </tr>
+        </table>
+        <br/>
+        <h2>Copie e cole a senha no sistema e altere sua senha depois</h2>
+        <a href="http://52.41.118.153:8080/PedidoVenda/">Acesse agora mesmo o sistema</a>
+    </body>
+</html>

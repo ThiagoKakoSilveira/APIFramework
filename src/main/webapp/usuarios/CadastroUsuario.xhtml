@@ -44,14 +44,6 @@
 				<p:inputText id="email" value="#{usuarioBean.usuario.email}"
 					size="60" maxlength="80" />
 
-				<p:outputLabel value="Senha" for="senha" />
-				<p:password id="senha" feedback="true" promptLabel="Informe a senha"
-					weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"
-					value="#{usuarioBean.usuario.senha}" match="confirmaSenha" />
-
-				<p:outputLabel value="Confirma Senha" for="confirmaSenha" />
-				<p:password id="confirmaSenha" promptLabel="Confirme a senha" />
-
 			</p:panelGrid>
 			<p:panelGrid columns="2" styleClass="sem-borda"
 				style="margin-top: 20px" columnClasses="rotulo, campo">

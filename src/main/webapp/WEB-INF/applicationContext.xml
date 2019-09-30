@@ -37,6 +37,7 @@
 		<custom-filter ref="exceptionTranslationFilter" before="FILTER_SECURITY_INTERCEPTOR" />
 
 		<intercept-url pattern="/Home.jsf" access="isAuthenticated()" />
+        <intercept-url pattern="/usuarios/EditarSenha" access="isAuthenticated()" />
 		<intercept-url pattern="/AcessoNegado.jsf" access="isAuthenticated()" />
 		<intercept-url pattern="/usuarios/**" access="hasAnyRole('ADMINISTRADORES')" />
 		<intercept-url pattern="/relatorios/**" access="hasAnyRole('ADMINISTRADORES')" />
