@@ -8,6 +8,7 @@ import com.outjected.email.impl.templating.velocity.VelocityTemplate;
 import org.apache.velocity.tools.generic.NumberTool;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
@@ -38,12 +39,14 @@ public class EnvioPedidoEmailBean implements Serializable {
 
 //		URL url2 = getClass().getClassLoader().getResource("/emails/pedido.template");
 //		System.out.println(url2);
+        String realPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/WEB-INF/classes/emails/pedido.template");
 
 		message.to(this.pedido.getCliente().getEmail())
 				.subject("Pedido " + this.pedido.getId())
 //				.bodyHtml(new VelocityTemplate(getClass().getResourceAsStream("/emails/pedido.template")))
 //				.bodyHtml(new VelocityTemplate(file))
-				.bodyHtml(new VelocityTemplate(new File("D:\\TesteIntelliJ\\PedidoVendaFielAoCurso\\PedidoVenda-master\\src\\main\\resources\\emails\\pedido.template")))
+//				.bodyHtml(new VelocityTemplate(new File("D:\\TesteIntelliJ\\PedidoVendaFielAoCurso\\PedidoVenda-master\\src\\main\\resources\\emails\\pedido.template")))
+				.bodyHtml(new VelocityTemplate(new File(realPath)))
 				.put("pedido", this.pedido)
 				.put("numberTool", new NumberTool())
 				.put("locale", new Locale("pt", "BR"))

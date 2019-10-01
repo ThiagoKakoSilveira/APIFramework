@@ -12,6 +12,7 @@ import com.outjected.email.api.MailMessage;
 import com.outjected.email.impl.templating.velocity.VelocityTemplate;
 
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
@@ -64,8 +65,10 @@ public class UsuarioBean implements Serializable {
 
 	private void enviaSenhaPorEmail() throws IOException {
 		MailMessage message = mailer.novaMensagem();
+        String realPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/WEB-INF/classes/emails/senhaEmail.template");
 		message.to(this.usuario.getEmail()).subject("Senha do Sistema de Venda")
-				.bodyHtml(new VelocityTemplate(new File("D:\\TesteIntelliJ\\PedidoVendaFielAoCurso\\PedidoVenda-master\\src\\main\\resources\\emails\\senhaEmail.template")))
+//				.bodyHtml(new VelocityTemplate(new File("D:\\TesteIntelliJ\\PedidoVendaFielAoCurso\\PedidoVenda-master\\src\\main\\resources\\emails\\senhaEmail.template")))
+                .bodyHtml(new VelocityTemplate(new File(realPath)))
 				.put("usuario", this.usuario)
 				.send();
 	}
