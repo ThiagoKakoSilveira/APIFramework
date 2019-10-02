@@ -116,10 +116,6 @@ public class ClienteBean implements Serializable {
 	}
 
 	public void integraClienteEndereco(){
-		if(this.cliente.getEnderecos().contains(this.endereco)){
-			System.out.println("Irá excluir");
-			this.cliente.getEnderecos().remove(this.endereco);
-		}
 		this.endereco.setCliente(this.getCliente());
 		this.cliente.getEnderecos().add(this.endereco);
 		endereco = new Endereco();
