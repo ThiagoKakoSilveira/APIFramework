@@ -63,24 +63,7 @@ public class ClienteBean implements Serializable {
 
 		if (!this.ehNovo){
 			System.out.println("Não é novo!");
-			Iterator itr = this.cliente.getEnderecos().iterator();
-			while (itr.hasNext())
-			{
-				Endereco end = (Endereco) itr.next();
-				System.out.println("Pegou o próximo item! E");
-				if (end.getIdEdit() != null) {
-					if (end.getIdEdit().equals(this.endereco.getIdEdit())) {
-						itr.remove();
-						System.out.println("Excluiu um novo!");
-					}
-				}else {
-					if (end.equals(endereco)) {
-						itr.remove();
-						System.out.println("Excluiu um antigo!");
-					}
-				}
-				System.out.println("Nada Fez");
-			}
+			alteraLista(this.cliente.getEnderecos(), endereco);
 		}
 		this.endereco.setCliente(this.getCliente());
 		System.out.println("Irá salvar na lista");
@@ -117,10 +100,33 @@ public class ClienteBean implements Serializable {
 		endereco.setIdEdit(JavaUtil.entregaString());
 	}
 
+	private void alteraLista(List lista, Endereco endParam){
+		Iterator itr = lista.iterator();
+		while (itr.hasNext())
+		{
+			Endereco end = (Endereco) itr.next();
+			System.out.println("Pegou o próximo item! E");
+			if (end.getIdEdit() != null) {
+				if (end.getIdEdit().equals(endParam.getIdEdit())) {
+					itr.remove();
+					System.out.println("Excluiu um novo!");
+				}
+			}else {
+				if (end.equals(endParam)) {
+					itr.remove();
+					System.out.println("Excluiu um antigo!");
+				}
+			}
+			System.out.println("Nada Fez");
+		}
+	}
+
 	public void excluiEndereco(){
 		enderecoRepository.remover(enderecoDeExclusao);
+		alteraLista(this.cliente.getEnderecos(), enderecoDeExclusao);
 
-		FacesUtil.addInfoMessage("Endereço de logradouro: " + enderecoDeExclusao.getLogradouro() + "Vinculado ao cliente: " + enderecoDeExclusao.getCliente().getNome());
+		FacesUtil.addInfoMessage("Endereço de logradouro: " + enderecoDeExclusao.getLogradouro() + " Vinculado ao cliente: " + enderecoDeExclusao.getCliente().getNome()+
+				" foi excluído!");
 	}
 
 	public boolean isEditando() {

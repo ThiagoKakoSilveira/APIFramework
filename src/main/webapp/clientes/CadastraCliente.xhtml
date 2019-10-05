@@ -66,13 +66,13 @@
 					value="#{clienteBean.cliente.email}" />
 
 				<p:commandButton value="Endereço" icon="ui-icon-plusthick"
-					oncomplete="PF('inclusaoEndereco').show()" action="#{clienteBean.criaEndereco}" update=":frmPai:modalEndereco" process="@this"/>
+					oncomplete="PF('inclusaoEndereco').show()" action="#{clienteBean.criaEndereco}" update=":frmPai:modalEndereco:inclusaoEndereco" process="@this"/>
 			</p:panelGrid>
 
 			<ui:include src="../WEB-INF/template/clientes/EnderecoCliente.xhtml" />
 
 			<h:form id="modalEndereco">
-				<p:dialog header="Inclusão de endereço" modal="true" closable="true"
+				<p:dialog id="inclusaoEndereco" header="Inclusão de endereço" modal="true" closable="true"
 						  widgetVar="inclusaoEndereco" resizable="false">
 
 					<p:panelGrid columns="2" columnClasses="rotulo, campo">

@@ -24,7 +24,8 @@ public class EnderecoRepository implements Serializable {
 
 	@Transactional
 	public void remover(Endereco endereco){
-		entityManager.remove(endereco);
+		Endereco seraExcluido = entityManager.find(Endereco.class, endereco.getId());
+		entityManager.remove(seraExcluido);
 		entityManager.flush();
 	}
 }
