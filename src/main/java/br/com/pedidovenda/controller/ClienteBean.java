@@ -40,8 +40,6 @@ public class ClienteBean implements Serializable {
 
 	private boolean ehNovo;
 
-//	private List<Endereco> enderecos;
-
 	private List<Cliente> clientesFiltrados;
 	private ClienteFilter clienteFilter;
 
@@ -49,12 +47,10 @@ public class ClienteBean implements Serializable {
 		limpar();
 	}
 
-//	public String salvar() {
     public void salvar() {
 		this.cliente = clienteService.salvar(cliente);
 		FacesUtil.addInfoMessage("Cliente cadastrado com sucesso!");
 		limpar();
-//		return "CadastraCliente?faces-redirect=true";
 	}
 
 	public void integraClienteEndereco(){
@@ -69,7 +65,6 @@ public class ClienteBean implements Serializable {
 		System.out.println("Irá salvar na lista");
 		this.cliente.getEnderecos().add(this.endereco);
 		this.ehNovo=false;
-//		criaEndereco();
 	}
 
 	public void excluir() {
@@ -88,14 +83,11 @@ public class ClienteBean implements Serializable {
 		endereco = new Endereco();
 		cliente.setTipo(TipoPessoa.FISICA);
 		clienteFilter = new ClienteFilter();
-//		enderecos = new ArrayList<>();
 		cliente.setEnderecos(new ArrayList<>());
 	}
 
 	public void criaEndereco(){
-		System.out.println("Vai criar Endereço");
 		endereco = new Endereco();
-		System.out.println("Criou Endereço");
 		this.ehNovo = true;
 		endereco.setIdEdit(JavaUtil.entregaString());
 	}
@@ -105,19 +97,15 @@ public class ClienteBean implements Serializable {
 		while (itr.hasNext())
 		{
 			Endereco end = (Endereco) itr.next();
-			System.out.println("Pegou o próximo item! E");
 			if (end.getIdEdit() != null) {
 				if (end.getIdEdit().equals(endParam.getIdEdit())) {
 					itr.remove();
-					System.out.println("Excluiu um novo!");
 				}
 			}else {
 				if (end.equals(endParam)) {
 					itr.remove();
-					System.out.println("Excluiu um antigo!");
 				}
 			}
-			System.out.println("Nada Fez");
 		}
 	}
 
