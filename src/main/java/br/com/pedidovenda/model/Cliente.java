@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "cliente")
@@ -29,16 +30,19 @@ public class Cliente implements Serializable {
 	private Long id;
 
 	@NotNull
+	@NotBlank
 	@Size(max = 100)
 	@Column(nullable = false, length = 100)
 	private String nome;
 
 	@Size(max = 150)
+	@NotBlank
 	@Email
 	@Column(nullable = false, length = 150)
 	private String email;
 
 	@NotNull
+	@NotBlank
 	@Size(max = 20)
 	@Column(name = "doc_receita_federal", nullable = false, length = 20)
 	private String documentoReceitaFederal;

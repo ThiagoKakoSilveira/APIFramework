@@ -1,14 +1,11 @@
 package br.com.pedidovenda.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -23,11 +20,13 @@ public class Endereco implements Serializable {
 	private Long id;
 
 	@NotNull
+	@NotBlank
 	@Size(max = 150)
 	@Column(nullable = false, length = 150)
 	private String logradouro;
 
 	@NotNull
+	@NotBlank
 	@Size(max = 20)
 	@Column(length = 20)
 	private String numero;
@@ -37,16 +36,19 @@ public class Endereco implements Serializable {
 	private String complemento;
 
 	@NotNull
+	@NotBlank
 	@Size(max = 60)
 	@Column(length = 60)
 	private String cidade;
 
 	@NotNull
+	@NotBlank
 	@Size(max = 60)
 	@Column(length = 60)
 	private String uf;
 
 	@NotNull
+	@NotBlank
 	@Size(max = 9)
 	@Column(length = 9)
 	private String cep;
@@ -54,6 +56,9 @@ public class Endereco implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = true)
 	private Cliente cliente;
+
+	@Transient
+	private String idEdit;
 
 	public Long getId() {
 		return id;
@@ -117,6 +122,14 @@ public class Endereco implements Serializable {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public String getIdEdit() {
+		return idEdit;
+	}
+
+	public void setIdEdit(String idEdit) {
+		this.idEdit = idEdit;
 	}
 
 	@Override

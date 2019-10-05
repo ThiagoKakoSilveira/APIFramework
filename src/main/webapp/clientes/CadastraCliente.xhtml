@@ -66,7 +66,7 @@
 					value="#{clienteBean.cliente.email}" />
 
 				<p:commandButton value="Endereço" icon="ui-icon-plusthick"
-					oncomplete="PF('inclusaoEndereco').show()" action="#{clienteBean.criaEndereco}" update=":frmPai:modalEndereco" process="@this :frmPai:modalEndereco"/>
+					oncomplete="PF('inclusaoEndereco').show()" action="#{clienteBean.criaEndereco}" update=":frmPai:modalEndereco" process="@this"/>
 			</p:panelGrid>
 
 			<ui:include src="../WEB-INF/template/clientes/EnderecoCliente.xhtml" />
@@ -103,17 +103,19 @@
 						</h:panelGroup>
 						<p:spacer />
 
-						<p:commandButton value="Incluir" oncomplete="PF('inclusaoEndereco').hide()" icon="ui-icon-document" action="#{clienteBean.integraClienteEndereco}" update=":frmPai:tabelaEnderecos @form" process="modalEndereco"/>
-
+						<p:commandButton value="Incluir" oncomplete="PF('inclusaoEndereco').hide()" icon="ui-icon-document"
+										 action="#{clienteBean.integraClienteEndereco}" update=":frmPai:tabelaEnderecos @form"
+										 process="modalEndereco"/>
 					</p:panelGrid>
 				</p:dialog>
 			</h:form>
 
-			<p:confirmDialog header="Exclusão do endereço"
-				message="Tem certeza que deseja excluir este endereço?"
+			<p:confirmDialog id="dialogExclusaoEndereco" header="Exclusão do endereço"
+			 	showEffect="fade" closable="true" hideEffect="explode"
+				message="Tem certeza que deseja excluir o endereço #{clienteBean.enderecoDeExclusao.logradouro} do cliente #{clienteBean.cliente.nome} ?"
 				widgetVar="exclusaoEndereco">
-				<p:button value="Não" onclick="PF('exclusaoEndereco').hide()" />
-				<p:commandButton value="Sim"
+				<p:button value="Não" onclick="PF('exclusaoEndereco').hide(); return false;" />
+				<p:commandButton value="Sim" process="@this" update=":frmPai:tabelaEnderecos" action="#{clienteBean.excluiEndereco}"
 					oncomplete="PF('exclusaoEndereco').hide()" />
 			</p:confirmDialog>
 		</h:form>

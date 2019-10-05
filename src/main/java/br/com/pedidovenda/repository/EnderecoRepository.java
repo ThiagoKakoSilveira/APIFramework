@@ -1,6 +1,7 @@
 package br.com.pedidovenda.repository;
 
 import br.com.pedidovenda.model.Endereco;
+import br.com.pedidovenda.util.jpa.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -19,6 +20,11 @@ public class EnderecoRepository implements Serializable {
 
 	public Endereco salvar(Endereco endereco) {
 		return entityManager.merge(endereco);
+	}
 
+	@Transactional
+	public void remover(Endereco endereco){
+		entityManager.remove(endereco);
+		entityManager.flush();
 	}
 }

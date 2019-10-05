@@ -1,14 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:h="http://java.sun.com/jsf/html">
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html">
 
 <p:dataTable value="#{clienteBean.cliente.enderecos}" id="tabelaEnderecos" var="endereco" style="margin-top: 20px">
 
 	<p:column headerText="Logradouro"
-		style="text-align: left; width: 300px">
+			  style="text-align: left; width: 300px">
 		<h:outputText value="#{endereco.logradouro}" />
 	</p:column>
 	<p:column headerText="Número" style="text-align: center; width: 60px">
@@ -28,25 +28,15 @@
 
 	<p:column style="text-align: center; width: 70px" headerText="Ações">
 
-		<p:commandButton icon="ui-icon-pencil" title="Editar" oncomplete="PF('inclusaoEndereco').show()" update=":frmPai:modalEndereco" process="@this :frmPai:modalEndereco">
-            <f:setPropertyActionListener value="#{endereco}" target="#{clienteBean.endereco}" />
-        </p:commandButton>
+		<p:commandButton icon="ui-icon-pencil" title="Editar" oncomplete="PF('inclusaoEndereco').show()" update=":frmPai:tabelaEnderecos @form" process="@this">
+			<f:setPropertyActionListener value="#{endereco}" target="#{clienteBean.endereco}" />
+		</p:commandButton>
 
-		<p:commandButton icon="ui-icon-trash" title="Excluir"
-			onclick="PF('exclusaoEndereco').show()" />
+		<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('exclusaoEndereco').show()" update=":frmPai:dialogExclusaoEndereco" process="@this">
+			<f:setPropertyActionListener value="#{endereco}" target="#{clienteBean.enderecoDeExclusao}" />
+		</p:commandButton>
 	</p:column>
 
 </p:dataTable>
-
-<h:form id="frmEndereco">
-	<p:confirmDialog header="Exclusão do endereço"
-		message="Tem certeza que deseja excluir este endereço?"
-		widgetVar="exclusaoEndereco">
-		<p:button value="Não" onclick="PF('exclusaoEndereco').hide(); return false;" />
-		<p:commandButton value="Sim"
-			oncomplete="PF('exclusaoEndereco').hide()" />
-	</p:confirmDialog>
-</h:form>
-
 
 </html>
