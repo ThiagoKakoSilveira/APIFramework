@@ -54,15 +54,10 @@ public class ClienteBean implements Serializable {
 	}
 
 	public void integraClienteEndereco(){
-
-		System.out.println("Vai começar a testar se existe");
-
 		if (!this.ehNovo){
-			System.out.println("Não é novo!");
 			alteraLista(this.cliente.getEnderecos(), endereco);
 		}
 		this.endereco.setCliente(this.getCliente());
-		System.out.println("Irá salvar na lista");
 		this.cliente.getEnderecos().add(this.endereco);
 		this.ehNovo=false;
 	}
